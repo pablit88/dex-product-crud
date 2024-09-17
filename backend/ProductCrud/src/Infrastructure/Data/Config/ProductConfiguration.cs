@@ -46,7 +46,9 @@ namespace Dex.ProductCrud.Infrastructure.Data.Config
             );
 
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.Id).HasColumnName("ProductID");
+            builder.Property(p => p.Id)
+                .HasColumnName("ProductID")
+                .ValueGeneratedOnAdd();
         }
     }
 }

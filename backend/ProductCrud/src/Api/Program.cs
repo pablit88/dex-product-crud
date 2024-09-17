@@ -1,4 +1,6 @@
 using Dex.ProductCrud.Core.Interfaces.Repositories;
+using Dex.ProductCrud.Core.Interfaces.Services;
+using Dex.ProductCrud.Core.Services;
 using Dex.ProductCrud.Infrastructure.Data;
 using Dex.ProductCrud.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,9 @@ builder.Services.AddScoped<ProductCrudDbContext>();
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+//Add Services
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

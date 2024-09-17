@@ -7,9 +7,4 @@
     <RootNamespace>Dex.ProductCrud.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\Services\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

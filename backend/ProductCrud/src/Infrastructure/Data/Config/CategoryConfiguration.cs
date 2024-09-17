@@ -12,8 +12,11 @@ namespace Dex.ProductCrud.Infrastructure.Data.Config
                 .IsRequired()
                 .HasMaxLength(32);
 
+            builder.Property(c => c.Id)
+                .HasColumnName("CategoryID")
+                .ValueGeneratedOnAdd();
+
             builder.HasKey(c => c.Id);
-            builder.Property(c => c.Id).HasColumnName("CategoryID");
         }
     }
 }

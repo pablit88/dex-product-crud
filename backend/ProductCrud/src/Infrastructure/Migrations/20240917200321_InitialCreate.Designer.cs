@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dex.ProductCrud.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductCrudDbContext))]
-    [Migration("20240917190037_InitialCreate")]
+    [Migration("20240917200321_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
