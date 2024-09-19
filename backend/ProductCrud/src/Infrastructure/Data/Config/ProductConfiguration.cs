@@ -21,27 +21,24 @@ namespace Dex.ProductCrud.Infrastructure.Data.Config
                 .IsRequired()
                 .HasMaxLength(64);
 
-            //builder.HasMany(p => p.Categories)
-            //    .WithMany(c => c.Products)
-            //    .UsingEntity(
-            //    j => j.ToTable("ProductCategory"));
-
             builder.HasMany(p => p.Categories)
-            .WithMany(c => c.Products)
+            .WithMany()
             .UsingEntity<Dictionary<string, object>>(
-                "ProductCategory", // Name of the join table
-                j => j.HasOne<Category>() // Link to Category
+                "ProductCategory",
+                j => j.HasOne<Category>()
                     .WithMany()
-                    .HasForeignKey("CategoryID") // Configure foreign key
-                    .HasConstraintName("FK_ProductCategory_Category"),
-                j => j.HasOne<Product>() // Link to Product
+                    .HasForeignKey("CategoryID")
+                    .HasConstraintName("FK_ProductCategory_Category")
+                    .OnDelete(DeleteBehavior.Cascade),
+                j => j.HasOne<Product>()
                     .WithMany()
-                    .HasForeignKey("ProductID") // Configure foreign key
-                    .HasConstraintName("FK_ProductCategory_Product"),
+                    .HasForeignKey("ProductID")
+                    .HasConstraintName("FK_ProductCategory_Product")
+                    .OnDelete(DeleteBehavior.Cascade),
                 j =>
                 {
-                    j.ToTable("ProductCategory"); // Join table name
-                    j.HasKey("ProductID", "CategoryID"); // Composite primary key
+                    j.ToTable("ProductCategory");
+                    j.HasKey("ProductID", "CategoryID");
                 }
             );
 

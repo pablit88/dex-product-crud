@@ -29,7 +29,7 @@ namespace Dex.ProductCrud.Infrastructure.Data
 
         public async Task<IEnumerable<T>> ListAllAsync() => await _dbContext.Set<T>().ToListAsync();
 
-        public async Task<T> GetByIdAsync(int id) => await _dbContext.Set<T>().FindAsync(id);
+        public async Task<T?> GetByIdAsync(int id) => await _dbContext.Set<T>().FindAsync(id);
 
         public async Task UpdateAsync(T entity)
         {
