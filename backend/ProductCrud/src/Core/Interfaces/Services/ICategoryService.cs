@@ -7,7 +7,7 @@ namespace Dex.ProductCrud.Core.Interfaces.Services
         Task<int> AddAsync(Category category);
         Task<Category?> GetByIdAsync(int id);
         Task<IEnumerable<Category>> GetAllAsync();
-        Task UpdateAsync(Category category);
-        Task DeleteAsync(Category category);
+        Task UpdateAsync(int categoryId, Category category);
+        Task DeleteAsync(int categoryId);
     }
 }

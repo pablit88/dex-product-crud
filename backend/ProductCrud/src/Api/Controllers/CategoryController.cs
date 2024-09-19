@@ -1,4 +1,5 @@
 ﻿using Dex.ProductCrud.Core.Entities;
+using Dex.ProductCrud.Core.Exceptions;
 using Dex.ProductCrud.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,23 +22,36 @@ namespace Dex.ProductCrud.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var categories = await _categoryService.GetAllAsync();
-
-            return Ok(categories);
+            try
+            {
+                var categories = await _categoryService.GetAllAsync();
+                return Ok(categories);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // GET api/<CategoryController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var category = await _categoryService.GetByIdAsync(id);
-
-            if (category == null)
+            try
             {
-                return NotFound();
-            }
+                var category = await _categoryService.GetByIdAsync(id);
 
-            return Ok(category);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(category);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // POST api/<CategoryController>
@@ -49,9 +63,15 @@ namespace Dex.ProductCrud.Api.Controllers
                 return BadRequest("Category cannot be null.");
             }
 
-            var categoryId = await _categoryService.AddAsync(category);
-
-            return Ok(categoryId);
+            try
+            {
+                var categoryId = await _categoryService.AddAsync(category);
+                return Ok(categoryId);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // PUT api/<CategoryController>/5
@@ -63,32 +83,38 @@ namespace Dex.ProductCrud.Api.Controllers
                 return BadRequest("Invalid category data.");
             }
 
-            var existingCategory = await _categoryService.GetByIdAsync(id);
-            if (existingCategory == null)
+            try
             {
-                return NotFound();
+                await _categoryService.UpdateAsync(id, category);
+                return NoContent();
             }
-
-            existingCategory.Name = category.Name;
-
-            await _categoryService.UpdateAsync(existingCategory);
-
-            return NoContent();
+            catch (NotFoundException nfEx)
+            {
+                return NotFound(nfEx.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // DELETE api/<CategoryController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var category = await _categoryService.GetByIdAsync(id);
-            if (category == null)
+            try
             {
-                return NotFound();
+                await _categoryService.DeleteAsync(id);
+                return NoContent();
             }
-
-            await _categoryService.DeleteAsync(category);
-
-            return NoContent();
+            catch (NotFoundException nfEx)
+            {
+                return NotFound(nfEx.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

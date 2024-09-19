@@ -1,4 +1,5 @@
 ﻿using Dex.ProductCrud.Core.Entities;
+using Dex.ProductCrud.Core.Exceptions;
 using Dex.ProductCrud.Core.Interfaces.Repositories;
 using Dex.ProductCrud.Core.Interfaces.Services;
 
@@ -20,8 +21,14 @@ namespace Dex.ProductCrud.Core.Services
             return category.Id;
         }
 
-        public async Task DeleteAsync(Category category)
+        public async Task DeleteAsync(int categoryId)
         {
+            var category = await _categoryRepository.GetByIdAsync(categoryId);
+            if (category == null)
+            {
+                throw new NotFoundException("Category not found.");
+            }
+
             await _categoryRepository.DeleteAsync(category);
         }
 
@@ -29,9 +36,17 @@ namespace Dex.ProductCrud.Core.Services
 
         public async Task<Category?> GetByIdAsync(int id) => await _categoryRepository.GetByIdAsync(id);
 
-        public async Task UpdateAsync(Category category)
+        public async Task UpdateAsync(int categoryId, Category category)
         {
-            await _categoryRepository.UpdateAsync(category);
+            var existingCategory = await _categoryRepository.GetByIdAsync(categoryId);
+            if (existingCategory == null)
+            {
+                throw new NotFoundException("Category not found.");
+            }
+
+            existingCategory.Name = category.Name;
+
+            await _categoryRepository.UpdateAsync(existingCategory);
         }
     }
 }
