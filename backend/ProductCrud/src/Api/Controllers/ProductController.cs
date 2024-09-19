@@ -1,4 +1,4 @@
-﻿using Dex.ProductCrud.Core.Entities;
+﻿using Dex.ProductCrud.Core.DataTransferObjects;
 using Dex.ProductCrud.Core.Exceptions;
 using Dex.ProductCrud.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -54,16 +54,16 @@ namespace Dex.ProductCrud.Api.Controllers
 
         // POST api/<ProductController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Product product)
+        public async Task<IActionResult> Post([FromBody] ProductInfo productInfo)
         {
-            if (product == null)
+            if (productInfo == null)
             {
                 return BadRequest("product cannot be null.");
             }
 
             try
             {
-                var productId = await _productService.AddAsync(product);
+                var productId = await _productService.AddAsync(productInfo);
                 return Ok(productId);
             }
             catch (Exception ex)
@@ -74,16 +74,16 @@ namespace Dex.ProductCrud.Api.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Product product)
+        public async Task<IActionResult> Put(int id, [FromBody] ProductInfo productInfo)
         {
-            if (product == null || id != product.Id)
+            if (productInfo == null)
             {
                 return BadRequest("Invalid product data.");
             }
 
             try
             {
-                await _productService.UpdateAsync(id, product);
+                await _productService.UpdateAsync(id, productInfo);
                 return NoContent();
             }
             catch (NotFoundException nfEx)

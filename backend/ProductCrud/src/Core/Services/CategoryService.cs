@@ -1,4 +1,5 @@
-﻿using Dex.ProductCrud.Core.Entities;
+﻿using Dex.ProductCrud.Core.DataTransferObjects;
+using Dex.ProductCrud.Core.Entities;
 using Dex.ProductCrud.Core.Exceptions;
 using Dex.ProductCrud.Core.Interfaces.Repositories;
 using Dex.ProductCrud.Core.Interfaces.Services;
@@ -14,8 +15,9 @@ namespace Dex.ProductCrud.Core.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<int> AddAsync(Category category)
+        public async Task<int> AddAsync(CategoryInfo categoryInfo)
         {
+            var category = new Category() {  Name = categoryInfo.Name };
             category = await _categoryRepository.AddAsync(category);
 
             return category.Id;
@@ -36,7 +38,7 @@ namespace Dex.ProductCrud.Core.Services
 
         public async Task<Category?> GetByIdAsync(int id) => await _categoryRepository.GetByIdAsync(id);
 
-        public async Task UpdateAsync(int categoryId, Category category)
+        public async Task UpdateAsync(int categoryId, CategoryInfo categoryInfo)
         {
             var existingCategory = await _categoryRepository.GetByIdAsync(categoryId);
             if (existingCategory == null)
@@ -44,7 +46,7 @@ namespace Dex.ProductCrud.Core.Services
                 throw new NotFoundException("Category not found.");
             }
 
-            existingCategory.Name = category.Name;
+            existingCategory.Name = categoryInfo.Name;
 
             await _categoryRepository.UpdateAsync(existingCategory);
         }

@@ -1,4 +1,5 @@
-﻿using Dex.ProductCrud.Core.Entities;
+﻿using Dex.ProductCrud.Core.DataTransferObjects;
+using Dex.ProductCrud.Core.Entities;
 using Dex.ProductCrud.Core.Exceptions;
 using Dex.ProductCrud.Core.Interfaces.Repositories;
 using Dex.ProductCrud.Core.Interfaces.Services;
@@ -16,8 +17,9 @@ namespace Dex.ProductCrud.Core.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<int> AddAsync(Product product)
+        public async Task<int> AddAsync(ProductInfo productInfo)
         {
+            var product = new Product() {  Name = productInfo.Name, Description = productInfo.Description, Image = productInfo.Image };
             product = await _productRepository.AddAsync(product);
 
             return product.Id;
@@ -38,7 +40,7 @@ namespace Dex.ProductCrud.Core.Services
 
         public async Task<Product?> GetByIdAsync(int id) => await _productRepository.GetByIdAsync(id);
 
-        public async Task UpdateAsync(int productId, Product product)
+        public async Task UpdateAsync(int productId, ProductInfo productInfo)
         {
             var existingProduct = await _productRepository.GetByIdAsync(productId);
             if (existingProduct == null)
@@ -46,9 +48,9 @@ namespace Dex.ProductCrud.Core.Services
                 throw new NotFoundException("Product not found.");
             }
 
-            existingProduct.Name = product.Name;
-            existingProduct.Description = product.Description;
-            existingProduct.Image = product.Image;
+            existingProduct.Name = productInfo.Name;
+            existingProduct.Description = productInfo.Description;
+            existingProduct.Image = productInfo.Image;
 
             await _productRepository.UpdateAsync(existingProduct);
         }

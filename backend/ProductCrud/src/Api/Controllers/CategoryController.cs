@@ -1,4 +1,4 @@
-﻿using Dex.ProductCrud.Core.Entities;
+﻿using Dex.ProductCrud.Core.DataTransferObjects;
 using Dex.ProductCrud.Core.Exceptions;
 using Dex.ProductCrud.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -56,16 +56,16 @@ namespace Dex.ProductCrud.Api.Controllers
 
         // POST api/<CategoryController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Category category)
+        public async Task<IActionResult> Post([FromBody] CategoryInfo categoryInfo)
         {
-            if (category == null)
+            if (categoryInfo == null)
             {
                 return BadRequest("Category cannot be null.");
             }
 
             try
             {
-                var categoryId = await _categoryService.AddAsync(category);
+                var categoryId = await _categoryService.AddAsync(categoryInfo);
                 return Ok(categoryId);
             }
             catch (Exception ex)
@@ -76,16 +76,16 @@ namespace Dex.ProductCrud.Api.Controllers
 
         // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Category category)
+        public async Task<IActionResult> Put(int id, [FromBody] CategoryInfo categoryInfo)
         {
-            if (category == null || id != category.Id)
+            if (categoryInfo == null)
             {
                 return BadRequest("Invalid category data.");
             }
 
             try
             {
-                await _categoryService.UpdateAsync(id, category);
+                await _categoryService.UpdateAsync(id, categoryInfo);
                 return NoContent();
             }
             catch (NotFoundException nfEx)
