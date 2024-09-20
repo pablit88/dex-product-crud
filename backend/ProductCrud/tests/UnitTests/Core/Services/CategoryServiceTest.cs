@@ -106,14 +106,14 @@ namespace UnitTests.Core.Services
         }
 
         [Fact]
-        public async Task UpdateAsync_When_Category_Does_Not_Exists_Throws_NotFoundException()
+        public async Task UpdateAsync_When_Category_Does_Not_Exist_Throws_NotFoundException()
         {
             int nonExistingId = 1;
             var categoryInfo = A.New<CategoryInfo>();
-            Category? category = null;
+            Category? nullCategory = null;
 
             _categoryRepositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-                .ReturnsAsync(category);
+                .ReturnsAsync(nullCategory);
 
             var exception = await Record.ExceptionAsync(() => _categoryService.UpdateAsync(nonExistingId, categoryInfo));
 
@@ -142,14 +142,14 @@ namespace UnitTests.Core.Services
         }
 
         [Fact]
-        public async Task DeleteAsync_When_Category_Does_Not_Exists_Throws_NotFoundException()
+        public async Task DeleteAsync_When_Category_Does_Not_Exist_Throws_NotFoundException()
         {
             int nonExistingId = 1;
             var categoryInfo = A.New<CategoryInfo>();
-            Category? category = null;
+            Category? nullCategory = null;
 
             _categoryRepositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-                .ReturnsAsync(category);
+                .ReturnsAsync(nullCategory);
 
             var exception = await Record.ExceptionAsync(() => _categoryService.DeleteAsync(nonExistingId));
 
