@@ -1,0 +1,23 @@
+<h4>{{ isEditMode ? 'Edit Product' : 'New Product' }}</h4>
+
+<form #form="ngForm" (ngSubmit)="saveProduct()" class="productForm">
+  <mat-form-field appearance="fill">
+    <mat-label for="name">Name</mat-label>
+    <input matInput id="name" [(ngModel)]="product.name" name="name" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label for="description">Description</mat-label>
+    <textarea matInput id="description" [(ngModel)]="product.description" name="description" required></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label for="image">Image Link</mat-label>
+    <textarea matInput id="image" [(ngModel)]="product.image" name="image" required></textarea>
+  </mat-form-field>
+
+  <div class="formButtons">
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ isEditMode ? 'Update' : 'Create' }}</button>
+    <button mat-stroked-button color="warn" type="button" [routerLink]="['/products']">Cancel</button>
+  </div>
+</form>

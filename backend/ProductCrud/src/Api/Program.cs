@@ -7,6 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var angularLocalOrigin = builder.Configuration["CorsSettings:ProductCrudAngularLocalOrigin"];
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularLocalApp",
+        builder => builder.WithOrigins(angularLocalOrigin)
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -30,6 +40,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
+
+app.UseCors("AllowAngularLocalApp");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
