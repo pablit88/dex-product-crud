@@ -1,14 +1,23 @@
 <h2>{{ isEditMode ? 'Edit Product' : 'New Product' }}</h2>
-<form (ngSubmit)="saveProduct()">
-  <label for="name">Name</label>
-  <input id="name" [(ngModel)]="product.name" name="name" required>
-  
-  <label for="description">Description</label>
-  <textarea id="description" [(ngModel)]="product.description" name="description" required></textarea>
-  
-  <label for="image">Image Link</label>
-  <textarea id="image" [(ngModel)]="product.image" name="image" required></textarea>
-  
-  <button type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
-  <button [routerLink]="['/products']">Cancel</button>
+
+<form (ngSubmit)="saveProduct()" class="productForm">
+  <mat-form-field appearance="fill">
+    <mat-label for="name">Name</mat-label>
+    <input matInput id="name" [(ngModel)]="product.name" name="name" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label for="description">Description</mat-label>
+    <textarea matInput id="description" [(ngModel)]="product.description" name="description" required></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label for="image">Image Link</mat-label>
+    <textarea matInput id="image" [(ngModel)]="product.image" name="image" required></textarea>
+  </mat-form-field>
+
+  <div class="formButtons">
+    <button mat-raised-button color="primary" type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
+    <button mat-stroked-button color="warn" type="button" [routerLink]="['/products']">Cancel</button>
+  </div>
 </form>
