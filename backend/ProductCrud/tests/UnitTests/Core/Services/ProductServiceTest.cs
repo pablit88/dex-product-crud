@@ -7,7 +7,7 @@ using Dex.ProductCrud.Core.Services;
 using GenFu;
 using Moq;
 
-namespace UnitTests.Core.Services
+namespace Dex.ProductCrud.UnitTests.Core.Services
 {
     public class ProductServiceTest
     {
