@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{24DDCA19-1821-40FC-8C04-BB3A1C4EE87A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{951C4366-1207-4954-B278-64B934AE2703}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{951C4366-1207-4954-B278-64B934AE2703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "tests\IntegrationTests\IntegrationTests.csproj", "{CBE85143-60DD-47F3-A723-BA6F693F4B1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "tests\IntegrationTests\IntegrationTests.csproj", "{CBE85143-60DD-47F3-A723-BA6F693F4B1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalTests", "tests\FunctionalTests\FunctionalTests.csproj", "{0AD0D79C-B215-474F-8295-BE4C54130E2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{CBE85143-60DD-47F3-A723-BA6F693F4B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBE85143-60DD-47F3-A723-BA6F693F4B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBE85143-60DD-47F3-A723-BA6F693F4B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD0D79C-B215-474F-8295-BE4C54130E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD0D79C-B215-474F-8295-BE4C54130E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD0D79C-B215-474F-8295-BE4C54130E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD0D79C-B215-474F-8295-BE4C54130E2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{4C052987-2291-492A-A137-F69779A7A170} = {16B794DD-1373-4550-9D6B-4F6E2A40E5F8}
 		{951C4366-1207-4954-B278-64B934AE2703} = {24DDCA19-1821-40FC-8C04-BB3A1C4EE87A}
 		{CBE85143-60DD-47F3-A723-BA6F693F4B1C} = {24DDCA19-1821-40FC-8C04-BB3A1C4EE87A}
+		{0AD0D79C-B215-474F-8295-BE4C54130E2C} = {24DDCA19-1821-40FC-8C04-BB3A1C4EE87A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6E427D3-D101-4395-9FE6-D22F5F3A32F2}
