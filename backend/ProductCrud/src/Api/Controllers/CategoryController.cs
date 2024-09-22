@@ -19,7 +19,13 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // GET: api/<CategoryController>
+        /// <summary>
+        /// Retrieves all categories.
+        /// </summary>
+        /// <returns>List of categories.</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
             try
@@ -34,7 +40,15 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // GET api/<CategoryController>/5
+        /// <summary>
+        /// Retrieves a specific category by its ID.
+        /// </summary>
+        /// <param name="id">Category ID.</param>
+        /// <returns>Category data.</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(int id)
         {
             try
@@ -55,7 +69,15 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // POST api/<CategoryController>
+        /// <summary>
+        /// Creates a new category.
+        /// </summary>
+        /// <param name="categoryInfo">Category information.</param>
+        /// <returns>ID of the newly created category.</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] CategoryInfo categoryInfo)
         {
             if (categoryInfo == null)
@@ -75,7 +97,16 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // PUT api/<CategoryController>/5
+        /// <summary>
+        /// Updates an existing category by its ID.
+        /// </summary>
+        /// <param name="id">Category ID.</param>
+        /// <param name="categoryInfo">Updated category information.</param>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put(int id, [FromBody] CategoryInfo categoryInfo)
         {
             if (categoryInfo == null)
@@ -99,7 +130,14 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // DELETE api/<CategoryController>/5
+        /// <summary>
+        /// Deletes a category by its ID.
+        /// </summary>
+        /// <param name="id">Category ID.</param>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
             try

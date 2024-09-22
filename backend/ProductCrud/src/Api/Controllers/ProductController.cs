@@ -17,7 +17,13 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // GET: api/<ProductController>
+        /// <summary>
+        /// Retrieves a list of all products.
+        /// </summary>
+        /// <returns>A list of products.</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
             try
@@ -32,7 +38,15 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // GET api/<ProductController>/5
+        /// <summary>
+        /// Retrieves a product by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the product.</param>
+        /// <returns>The product with the specified ID.</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(int id)
         {
             try
@@ -53,7 +67,15 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // POST api/<ProductController>
+        /// <summary>
+        /// Creates a new product.
+        /// </summary>
+        /// <param name="productInfo">The information of the product to create.</param>
+        /// <returns>The ID of the created product.</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] ProductInfo productInfo)
         {
             if (productInfo == null)
@@ -73,7 +95,16 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // PUT api/<ProductController>/5
+        /// <summary>
+        /// Updates an existing product by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the product to update.</param>
+        /// <param name="productInfo">The updated product information.</param>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put(int id, [FromBody] ProductInfo productInfo)
         {
             if (productInfo == null)
@@ -97,7 +128,14 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // DELETE api/<ProductController>/5
+        /// <summary>
+        /// Deletes a product by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the product to delete.</param>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -116,7 +154,16 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // POST api/<ProductController>/5/categories/3
+        /// <summary>
+        /// Adds a category to a product.
+        /// </summary>
+        /// <param name="productId">The ID of the product.</param>
+        /// <param name="categoryId">The ID of the category to add.</param>
         [HttpPost("{productId}/categories/{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddCategoryToProduct(int productId, int categoryId)
         {
             try
@@ -139,7 +186,15 @@ namespace Dex.ProductCrud.Api.Controllers
         }
 
         // DELETE api/<ProductController>/5/categories/3
+        /// <summary>
+        /// Removes a category from a product.
+        /// </summary>
+        /// <param name="productId">The ID of the product.</param>
+        /// <param name="categoryId">The ID of the category to remove.</param>
         [HttpDelete("{productId}/categories/{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> RemoveCategoryFromProduct(int productId, int categoryId)
         {
             try
