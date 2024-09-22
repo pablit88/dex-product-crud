@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dex.ProductCrud.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductCrudDbContext))]
-    [Migration("20240917200321_InitialCreate")]
+    [Migration("20240922215115_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -59,8 +59,8 @@ namespace Dex.ProductCrud.Infrastructure.Migrations
 
                     b.Property<string>("Image")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Name")
                         .IsRequired()
