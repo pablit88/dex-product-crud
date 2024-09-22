@@ -19,7 +19,7 @@ namespace Dex.ProductCrud.Infrastructure.Data.Config
 
             builder.Property(p => p.Image)
                 .IsRequired()
-                .HasMaxLength(64);
+                .HasMaxLength(256);
 
             builder.HasMany(p => p.Categories)
             .WithMany()

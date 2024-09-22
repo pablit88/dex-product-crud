@@ -56,8 +56,8 @@ namespace Dex.ProductCrud.Infrastructure.Migrations
 
                     b.Property<string>("Image")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Name")
                         .IsRequired()
